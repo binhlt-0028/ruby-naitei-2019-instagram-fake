@@ -1,0 +1,6 @@
+vi:
+  posts:
+    create:
+      created: "Tạo bài viết thành công!"
+      create_fail: "Tạo không thành công!"
+      empty: "Nội dung và ảnh không được để trống!"

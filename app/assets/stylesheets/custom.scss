@@ -1,0 +1,59 @@
+@import 'bootstrap';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+
+$page_bg: #f2f2f2;
+$header_bg: #e44d3a;
+$orange_light: #e44d3a;
+$muted_color: #6c757d;
+
+*{
+  outline: none;
+}
+
+body{
+  background: $page_bg;
+}
+
+.header{
+  background: $header_bg;
+  img.logo{
+    width: 50px;
+    height: 50px;
+  }
+  img.avatar{
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.new-post input{
+  border-top: 5px solid $orange_light;
+}
+
+.post-element .user-info img{
+  width: 45px;
+  height: 45px;
+}
+
+.fa-ellipsis-v{
+  font-size: 20px;
+  color: black;
+}
+
+.card{
+  border-top: 5px solid $orange_light;
+}
+
+.reaction i{
+  color: gray;
+}
+
+.sub-menu{
+  .nav-link{
+    color: $muted_color!important;
+  }
+  .nav-link:hover{
+    text-decoration: underline;
+  }
+}
