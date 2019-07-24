@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope "(:locale)", locale: /en|vi/ do
     root "static_pages#home"
-    resources :posts, only: :create
+    resources :posts, only: [:create, :destroy]
   end
 end

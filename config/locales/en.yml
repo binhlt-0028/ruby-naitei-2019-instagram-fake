@@ -4,3 +4,17 @@ en:
       created: "Create post successfully!"
       create_fail: "Create fail!"
       empty: "Content and image can't entry"
+    destroy:
+      deleted: "Post deleted!"
+      detete_error: "Delete error"
+  shared:
+    post_element:
+      you_sure: "You sure?"
+      delete: "Delete"
+      edit: "Edit"
+      report: "Report"
+      commented: "people commented..."
+    post:
+      submit: "Submit"
+      new_post: "Create new post"
+      compose_new_post: "Compose new post..."

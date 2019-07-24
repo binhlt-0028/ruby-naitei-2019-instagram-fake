@@ -4,3 +4,17 @@ vi:
       created: "Tạo bài viết thành công!"
       create_fail: "Tạo không thành công!"
       empty: "Nội dung và ảnh không được để trống!"
+    destroy:
+      deleted: "Xóa bài viết thành công!"
+      detete_error: "Xóa không thành công"
+  shared:
+    post_element:
+      you_sure: "Bạn chắc chắn muốn xóa?"
+      delete: "Xóa bài viết"
+      edit: "Chỉnh sửa"
+      report: "Báo cáo"
+      commented: "người đã bình luận..."
+    post:
+      submit: "Gửi"
+      new_post: "Tạo bài viết mới"
+      compose_new_post: "Nội dung bài viết..."
