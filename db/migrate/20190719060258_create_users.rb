@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :reset_degest
       t.string :remeber_digest
       t.boolean :activated
-      t.boolean :status
+      t.boolean :non_block
 
       t.timestamps
     end
