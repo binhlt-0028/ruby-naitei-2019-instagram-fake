@@ -33,3 +33,5 @@
 .idea
 
 /test
+
+public/uploads/*
