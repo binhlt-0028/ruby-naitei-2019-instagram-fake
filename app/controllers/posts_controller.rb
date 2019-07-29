@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :load_post, only: %i(destroy edit update)
+  before_action :load_post, only: %i(show destroy edit update)
 
   def create
     @post = load_current_user.posts.build post_params
@@ -22,7 +22,9 @@ class PostsController < ApplicationController
     redirect_to root_url
   end
 
-  def show; end
+  def show
+    @current_user = load_current_user
+  end
 
   def edit
     respond_to do |format|

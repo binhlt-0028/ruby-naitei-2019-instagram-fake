@@ -10,10 +10,16 @@ vi:
     update:
       updated: "Cập nhật thành công!"
       fail: "Cập nhật thất bại!"
+    show:
+      you_sure: "Bạn chắc chắn muốn xóa?"
+      delete: "Xóa"
+      edit: "Chỉnh sửa"
+      report: "Báo cáo"
+      submit: "Gửi"
   shared:
     post_element:
       you_sure: "Bạn chắc chắn muốn xóa?"
-      delete: "Xóa bài viết"
+      delete: "Xóa"
       edit: "Chỉnh sửa"
       report: "Báo cáo"
       commented: "người đã bình luận..."

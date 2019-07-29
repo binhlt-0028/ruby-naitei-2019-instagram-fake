@@ -1,9 +1,9 @@
 class User < ApplicationRecord
-  has_many :posts
-  has_many :reports
-  has_many :comments
-  has_many :comment_reactions
-  has_many :reactions
+  has_many :posts, dependent: :destroy
+  has_many :reports, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :comment_reactions, dependent: :destroy
+  has_many :reactions, dependent: :destroy
   has_many :active_relationships, class_name: FollowUser.name,
                                   foreign_key: :follower_id,
                                   dependent: :destroy

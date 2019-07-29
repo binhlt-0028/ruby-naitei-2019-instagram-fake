@@ -10,6 +10,12 @@ en:
     update:
       updated: "Update successfully!"
       fail: "Update fail!"
+    show:
+      you_sure: "You sure?"
+      delete: "Delete"
+      edit: "Edit"
+      report: "Report"
+      submit: "Submit"
   shared:
     post_element:
       you_sure: "You sure?"

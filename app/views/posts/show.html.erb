@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="post-element bg-white py-3 px-4 mb-4">
+    <div class="user-info">
+      <div class="row">
+        <img src="https://znews-photo.zadn.vn/w660/Uploaded/cqdhmdxwp/2019_05_07/58950005_2293435560976842_1995073838693482496_o.jpg" class="rounded-circle mr-2">
+        <div class="line-he">
+          <p class="font-weight-bold m-0"><%= @post.user.name %></p>
+          <small class="text-muted"><i class="fa fa-history"></i>
+            <%= time_ago_in_words(@post.created_at) %>
+          </small>
+        </div>
+        <div class="dropdown show ml-auto mr-2">
+          <a href="#" data-toggle="dropdown">
+            <span class="fa fa-ellipsis-v"></span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+            <% if current_user?(@post.user) %>
+              <button class="dropdown-item edit_post" value="<%= @post.id %>"><%= t ".edit" %></button>
+              <%= link_to t(".delete"), @post, method: :delete, class: "dropdown-item",
+              data: { confirm: t(".you_sure") } %>
+            <% else %>
+              <a class="dropdown-item" href="#"><%= t ".report" %></a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="post-content py-2">
+      <p>
+        <%= @post.content %>
+      </p>
+      <%= image_tag @post.image.url, class:"img-fluid" %>
+    </div>
+    <div class="reaction border-bottom py-2">
+      <div class="d-flex">
+        <div class="reaction-count mr-3">
+          <div class="dropdown">
+            <% if @post.reactions.where(user_id: @current_user.id).empty? %>
+              <%= link_to "#", data: {toggle: "dropdown"}, class: "show_reaction" do %>
+                <%= hidden_field_tag "",@post.id, class: "post_id" %>
+                <%= hidden_field_tag "","", class: "reaction_id" %>
+                <%= content_tag :i, "", class: ["far", "fa-thumbs-up"] %>
+                <span class="count">  <%= @post.reactions.count %></span>
+              <% end %>
+            <% else %>
+              <%= link_to "#", data: {toggle: "dropdown"}, class: "show_reaction active" do %>
+                <%= hidden_field_tag "",@post.id, class: "post_id" %>
+                <% @reaction = @post.reactions.where(user_id: @current_user.id)[0] %>
+                <%= hidden_field_tag "",@reaction.id, class: "reaction_id" %>
+                <% @type_class = Reaction.type_id_enums.key(@reaction.type_id).gsub(/_/, "-") %>
+                <%= content_tag :i, "", class: ["fas", @type_class] %>
+                <span class="count">  <%= @post.reactions.count %></span>
+              <% end %>
+            <% end %>
+            <div class="dropdown-menu px-2" aria-labelledby="dropdownMenuLink">
+              <i class="far fa-thumbs-up mr-2"></i>
+              <i class="far fa-smile-beam mr-2"></i>
+              <i class="far fa-kiss-wink-heart mr-2"></i>
+              <i class="far fa-sad-tear mr-2"></i>
+              <i class="far fa-angry"></i>
+            </div>
+          </div>
+        </div>
+        <div class="comment-count">
+          <%= link_to p do %>
+            <i class="far fa-comment"></i>
+            <span> <%= @post.comments.count %></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="post-comment py-2">
+      <div class="comment-show">
+        <div class="comment-list">
+          <% @post.comments.each do |cmt| %>
+          <div class="comment-element d-flex">
+            <div class="comment-content">
+              <%= link_to cmt.user.name, "#" %> <%= cmt.content %>
+            </div>
+            <% if current_user?(cmt.user) %>
+            <div class="dropdown ml-auto">
+              <a href="#" data-toggle="dropdown">
+                <span class="fa fa-ellipsis-v"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                <button class="dropdown-item edit_cmt" value="<%= cmt.id %>"><%= t ".edit" %></button>
+                <button class="dropdown-item del_cmt" value="<%= cmt.id %>"><%= t ".delete" %></button>
+              </div>
+            </div>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+        <div class="input-group new_comment_box mt-2">
+          <%= hidden_field_tag "",@post.id, class: "post_id" %>
+          <input type="text" class="form-control new_comment" placeholder="comment">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="edit_post_modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= t ".update_post" %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_for @post, method: "patch" do |f|%>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.text_area :content,
+              rows: Settings.front_end.text_area.rows_num,
+              class: "form-control" %>
+          </div>
+          <div id="preview_image">
+            <img src="#" class="img-fluid">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit t(".submit"), class: "btn btn-primary btn-sm w-100" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
