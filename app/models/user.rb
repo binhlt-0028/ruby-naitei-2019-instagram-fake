@@ -15,4 +15,8 @@ class User < ApplicationRecord
   has_many :notifications, foreign_key: :receiver, dependent: :destroy
   has_many :reverse_notifications, foreign_key: :creator, dependent: :destroy,
               class_name: Notification.name
+
+  def feed
+    Post.where user_id: id
+  end
 end

@@ -8,7 +8,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create new post</h5>
+                <h5 class="modal-title"><%= t ".new_post" %></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -20,7 +20,7 @@
                         id: "new_post_image",
                         accept: "image/x-png,image/gif,image/jpeg" %>
                       <%= f.text_area :content, rows: "5", class: "form-control",
-                        placeholder: "Compose new post..." %>
+                        placeholder: t(".compose_new_post...") %>
                   </div>
                   <div id="preview_image" class="d-none">
                       <button type="button" class="close" id="remove_preview_image">
@@ -31,7 +31,7 @@
               </div>
               <div class="modal-footer">
                   <button type="button" id="new_post_add_image" class="btn btn-success btn-sm w-25">add image</button>
-                  <%= f.submit "Submit", class: "btn btn-primary btn-sm w-75" %>
+                  <%= f.submit t(".submit"), class: "btn btn-primary btn-sm w-75" %>
               </div>
             <% end %>
         </div>
