@@ -1,3 +1,9 @@
+const json_stt = {
+  ERROR: 404,
+  SUCCESS: 200
+}
+const REACTION_DEFAULT_CLASS = "far fa-thumbs-up";
+
 $(document).ready(function(){
   $.ajaxSetup({
     headers: {
@@ -45,4 +51,80 @@ $(document).ready(function(){
     });
     $('#edit_post_modal').modal('show');
   })
+
+  $('.reaction-count .dropdown-menu i.far').on('click', function () {
+    var clicked = $(this);
+    var reac_count_tag = clicked.parents('.reaction-count');
+    var type_class = clicked.attr('class').split(' ')[1];
+    var show_element = reac_count_tag.find('.show_reaction');
+    if(show_element.children('i').hasClass(REACTION_DEFAULT_CLASS))
+      create_reaction(type_class, show_element, reac_count_tag);
+    else if(show_element.children('i').hasClass(type_class))
+      destroy_reaction(show_element, reac_count_tag);
+    else
+      update_reaction(type_class, show_element, reac_count_tag);
+  })
 })
+
+function create_reaction(type_class, show_element, reac_count_tag){
+    var type_id = type_class.replace(/\-/g,'_');
+    var post_id = reac_count_tag.find('.post_id').val();
+    $.ajax({
+        url: 'reactions',
+        type: 'POST',
+        dataType: 'JSON',
+        data:{
+          post_id: post_id,
+          type_id: type_id
+        }
+    }).done(function(result) {
+      if(result.status == json_stt.SUCCESS){
+        var show_i_tag = show_element.children('i');
+        show_i_tag.removeClass();
+        show_i_tag.addClass("fas");
+        show_i_tag.addClass(type_class);
+        reac_count_tag.find('.reaction_id').val(result.data.id);
+        show_element.children('span').html(result.data.count);
+        reac_count_tag.find('a').addClass('active');
+      }
+    });
+}
+
+function destroy_reaction(show_element, reac_count_tag){
+  var id = reac_count_tag.find('.reaction_id').val();
+  $.ajax({
+        url: 'reactions/'+id,
+        type: 'DELETE',
+        dataType: 'JSON',
+    }).done(function(result) {
+      if(result.status == json_stt.SUCCESS){
+        var show_i_tag = show_element.children('i');
+        show_i_tag.removeClass();
+        show_i_tag.addClass(REACTION_DEFAULT_CLASS);
+        reac_count_tag.find('.reaction_id').val("");
+        show_element.children('span').html(result.data.count);
+        reac_count_tag.find('a').removeClass('active');
+      }
+    });
+}
+
+function update_reaction(type_class, show_element, reac_count_tag){
+  var id = reac_count_tag.find('.reaction_id').val();
+  var type_id = type_class.replace(/\-/g,'_');
+  $.ajax({
+        url: 'reactions/'+id,
+        type: 'PATCH',
+        dataType: 'JSON',
+        data:{
+          type_id: type_id
+        }
+    }).done(function(result) {
+      if(result.status == json_stt.SUCCESS){
+        var show_i_tag = show_element.children('i');
+        show_i_tag.removeClass();
+        show_i_tag.addClass("fas");
+        show_i_tag.addClass(type_class);
+        show_element.children('span').html(result.data.count);
+      }
+    });
+}

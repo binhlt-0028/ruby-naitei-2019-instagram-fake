@@ -1,66 +1,90 @@
 <% @posts.each do |p| %>
-  <div class="post-element bg-white py-3 px-4 mb-4">
-    <div class="user-info">
-      <div class="row">
-        <img src="https://znews-photo.zadn.vn/w660/Uploaded/cqdhmdxwp/2019_05_07/58950005_2293435560976842_1995073838693482496_o.jpg" class="rounded-circle mr-2">
-        <div class="line-he">
-          <p class="font-weight-bold m-0"><%= p.user.name %></p>
-          <small class="text-muted"><i class="fa fa-history"></i>
-            <%= time_ago_in_words(p.created_at) %>
-          </small>
-        </div>
-        <div class="dropdown show ml-auto mr-2">
-          <a href="#" data-toggle="dropdown">
-            <span class="fa fa-ellipsis-v"></span>
-          </a>
+<div class="post-element bg-white py-3 px-4 mb-4">
+  <div class="user-info">
+    <div class="row">
+      <img src="https://znews-photo.zadn.vn/w660/Uploaded/cqdhmdxwp/2019_05_07/58950005_2293435560976842_1995073838693482496_o.jpg" class="rounded-circle mr-2">
+      <div class="line-he">
+        <p class="font-weight-bold m-0"><%= p.user.name %></p>
+        <small class="text-muted"><i class="fa fa-history"></i>
+          <%= time_ago_in_words(p.created_at) %>
+        </small>
+      </div>
+      <div class="dropdown show ml-auto mr-2">
+        <a href="#" data-toggle="dropdown">
+          <span class="fa fa-ellipsis-v"></span>
+        </a>
 
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-            <% if current_user?(p.user) %>
-              <button class="dropdown-item edit_post" value="<%= p.id %>"><%= t ".edit" %></button>
-              <%= link_to t(".delete"), p, method: :delete, class: "dropdown-item",
-                  data: { confirm: t(".you_sure") } %>
-            <% else %>
-              <a class="dropdown-item" href="#"><%= t ".report" %></a>
-            <% end %>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+          <% if current_user?(p.user) %>
+          <button class="dropdown-item edit_post" value="<%= p.id %>"><%= t ".edit" %></button>
+          <%= link_to t(".delete"), p, method: :delete, class: "dropdown-item",
+          data: { confirm: t(".you_sure") } %>
+          <% else %>
+          <a class="dropdown-item" href="#"><%= t ".report" %></a>
+          <% end %>
 
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="post-content py-2">
-      <p>
-        <%= p.content %>
-      </p>
-      <%= image_tag p.image.url, class:"img-fluid" %>
-    </div>
-    <div class="reaction border-bottom py-2">
-      <div class="d-flex">
-        <div class="reaction-count mr-3">
-          <a href=""><i class="far fa-heart"></i></a>
-          <span>  50</span>
-        </div>
-        <div class="comment-count">
-          <a href=""><i class="far fa-comment"></i></a>
-          <span> 50</span>
-        </div>
-      </div>
-    </div>
-    <div class="post-comment py-2">
-      <div class="comment-show">
-        <a href=""><i class="fa fa-history"></i> 50 <%= t ".commented" %></a>
-      </div>
-      <div class="comment-element">
-        <a href="">Ronaldo</a> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, at.
-        <i class="far fa-heart float-right"></i>
-      </div>
-      <div class="comment-element">
-        <a href="">Ronaldo</a> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, at.
-        <i class="far fa-heart float-right"></i>
-      </div>
-      <div class="comment-element">
-        <a href="">Ronaldo</a> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, at.
-        <i class="far fa-heart float-right"></i>
       </div>
     </div>
   </div>
+  <div class="post-content py-2">
+    <p>
+      <%= p.content %>
+    </p>
+    <%= image_tag p.image.url, class:"img-fluid" %>
+  </div>
+  <div class="reaction border-bottom py-2">
+    <div class="d-flex">
+      <div class="reaction-count mr-3">
+        <div class="dropdown">
+          <% if p.reactions.where(user_id: @current_user.id).empty? %>
+          <%= link_to "#", data: {toggle: "dropdown"}, class: "show_reaction" do %>
+          <%= hidden_field_tag "",p.id, class: "post_id" %>
+          <%= hidden_field_tag "","", class: "reaction_id" %>
+          <%= content_tag :i, "", class: ["far", "fa-thumbs-up"] %>
+          <span class="count">  <%= p.reactions.count %></span>
+          <% end %>
+          <% else %>
+          <%= link_to "#", data: {toggle: "dropdown"}, class: "show_reaction active" do %>
+          <%= hidden_field_tag "",p.id, class: "post_id" %>
+          <% @reaction = p.reactions.where(user_id: @current_user.id)[0] %>
+          <%= hidden_field_tag "",@reaction.id, class: "reaction_id" %>
+          <% @type_class = Reaction.type_id_enums.key(@reaction.type_id).gsub(/_/, "-") %>
+          <%= content_tag :i, "", class: ["fas", @type_class] %>
+          <span class="count">  <%= p.reactions.count %></span>
+          <% end %>
+          <% end %>
+          <div class="dropdown-menu px-2" aria-labelledby="dropdownMenuLink">
+            <i class="far fa-thumbs-up mr-2"></i>
+            <i class="far fa-smile-beam mr-2"></i>
+            <i class="far fa-kiss-wink-heart mr-2"></i>
+            <i class="far fa-sad-tear mr-2"></i>
+            <i class="far fa-angry"></i>
+          </div>
+        </div>
+      </div>
+      <div class="comment-count">
+        <a href=""><i class="far fa-comment"></i></a>
+        <span> 50</span>
+      </div>
+    </div>
+  </div>
+  <div class="post-comment py-2">
+    <div class="comment-show">
+      <a href=""><i class="fa fa-history"></i> 50 <%= t ".commented" %></a>
+    </div>
+    <div class="comment-element">
+      <a href="">Ronaldo</a> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, at.
+      <i class="far fa-heart float-right"></i>
+    </div>
+    <div class="comment-element">
+      <a href="">Ronaldo</a> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, at.
+      <i class="far fa-heart float-right"></i>
+    </div>
+    <div class="comment-element">
+      <a href="">Ronaldo</a> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, at.
+      <i class="far fa-heart float-right"></i>
+    </div>
+  </div>
+</div>
 <% end %>

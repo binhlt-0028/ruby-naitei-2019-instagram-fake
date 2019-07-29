@@ -45,8 +45,28 @@ body{
   border-top: 5px solid $orange_light;
 }
 
-.reaction i{
-  color: gray;
+.reaction{
+  a{
+    color: black;
+    text-decoration: none;
+    &.active{
+      color: pink;
+    }
+  }
+  .dropdown{
+    &:hover>.dropdown-menu{
+      display: block;
+    }
+    .dropdown-toggle:active {
+      pointer-events: none;
+    }
+    .dropdown-menu i{
+      cursor: pointer;
+      &:hover{
+        font-size: 17px;
+      }
+    }
+  }
 }
 
 .sub-menu{

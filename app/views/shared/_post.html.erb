@@ -1,67 +1,94 @@
-<div class="right-side col-md-8">
+  <div class="right-side col-md-8">
     <%= render "shared/new_post" %>
     <div class="list_post">
-        <%= render "shared/post_element" %>
+      <%= render "shared/post_element" %>
     </div>
-</div>
-<div class="modal fade" id="new_post_modal" tabindex="-1" role="dialog">
+  </div>
+  <div class="modal fade" id="new_post_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><%= t ".new_post" %></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <%= form_for(@post) do |f| %>
-              <div class="modal-body">
-                  <div class="form-group">
-                      <%= f.file_field :image, class: "d-none",
-                        id: "new_post_image",
-                        accept: "image/x-png,image/gif,image/jpeg" %>
-                      <%= f.text_area :content,
-                        rows: Setting.front_end.text_area.rows_num,
-                        class: "form-control",
-                        placeholder: t(".compose_new_post...") %>
-                  </div>
-                  <div id="preview_image" class="d-none">
-                      <button type="button" class="close" id="remove_preview_image">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
-                      <img src="#" class="img-fluid">
-                  </div>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" id="new_post_add_image" class="btn btn-success btn-sm w-25"><%= t ".add_image" %></button>
-                  <%= f.submit t(".submit"), class: "btn btn-primary btn-sm w-75" %>
-              </div>
-            <% end %>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= t ".new_post" %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <%= form_for(@post) do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.file_field :image, class: "d-none",
+            id: "new_post_image",
+            accept: "image/x-png,image/gif,image/jpeg" %>
+            <%= f.text_area :content,
+            rows: Setting.front_end.text_area.rows_num,
+            class: "form-control",
+              placeholder: t(".compose_new_post...") %>
+            </div>
+            <div id="preview_image" class="d-none">
+              <button type="button" class="close" id="remove_preview_image">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <img src="#" class="img-fluid">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="new_post_add_image" class="btn btn-success btn-sm w-25"><%= t ".add_image" %></button>
+            <%= f.submit t(".submit"), class: "btn btn-primary btn-sm w-75" %>
+          </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-</div>
 
-<div class="modal fade" id="edit_post_modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal fade" id="edit_post_modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><%= t ".update_post" %></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+          <div class="modal-header">
+            <h5 class="modal-title"><%= t ".update_post" %></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <%= form_for @post, method: "patch" do |f|%>
+          <div class="modal-body">
+            <div class="form-group">
+              <%= f.text_area :content, rows: "5", class: "form-control"%>
             </div>
-            <%= form_for @post, method: "patch" do |f|%>
-              <div class="modal-body">
-                  <div class="form-group">
-                      <%= f.text_area :content, rows: "5", class: "form-control"%>
-                  </div>
-                  <div id="preview_image">
-                      <img src="#" class="img-fluid">
-                  </div>
-              </div>
-              <div class="modal-footer">
-                  <%= f.submit t(".submit"), class: "btn btn-primary btn-sm w-100" %>
-              </div>
-            <% end %>
+            <div id="preview_image">
+              <img src="#" class="img-fluid">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= f.submit t(".submit"), class: "btn btn-primary btn-sm w-100" %>
+          </div>
+          <% end %>
         </div>
+      </div>
     </div>
-</div>
+
+    <div class="modal fade" id="edit_post_modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Update post</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <%= form_for @post, method: "patch" do |f|%>
+          <div class="modal-body">
+            <div class="form-group">
+              <%= f.text_area :content, rows: "5", class: "form-control",
+              placeholder: "Compose new post..." %>
+            </div>
+            <div id="preview_image">
+              <img src="#" class="img-fluid">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= f.submit "Submit", class: "btn btn-primary btn-sm w-100" %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
