@@ -7,6 +7,9 @@ en:
     destroy:
       deleted: "Post deleted!"
       detete_error: "Delete error"
+    update:
+      updated: "Update successfully!"
+      fail: "Update fail!"
   shared:
     post_element:
       you_sure: "You sure?"
@@ -17,4 +20,5 @@ en:
     post:
       submit: "Submit"
       new_post: "Create new post"
+      update_post: "Update post"
       compose_new_post: "Compose new post..."

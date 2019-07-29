@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
-  before_action :correct_user, only: :destroy
+  before_action :load_post, only: %i(destroy edit update)
 
   def create
-    @post = current_user.posts.build post_params
+    @post = load_current_user.posts.build post_params
     @post.non_block = true
     if @post.save
       flash[:success] = t ".created"
@@ -22,14 +22,29 @@ class PostsController < ApplicationController
     redirect_to root_url
   end
 
+  def show; end
+
+  def edit
+    respond_to do |format|
+      format.json{render json: @post}
+    end
+  end
+
+  def update
+    flash[:success] = @post.update(post_params) ? t(".updated") : t(".fail")
+    redirect_to root_url
+  end
+
   private
 
   def post_params
     params.require(:post).permit :content, :image
   end
 
-  def correct_user
-    @post = load_current_user.posts.find_by id: params[:id]
-    redirect_to root_url unless @post
+  def load_post
+    @post = Post.find_by id: params[:id]
+    return if @post
+    flash[:danger] = t ".load_error"
+    redirect_to root_url
   end
 end
