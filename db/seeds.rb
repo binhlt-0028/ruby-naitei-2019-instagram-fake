@@ -3,3 +3,8 @@ User.create! name: "thanhbinh",
              password_digest: "123456",
              non_block: true,
              activated: true
+User.create! name: "user",
+             email: "user",
+             password_digest: "123456",
+             non_block: true,
+             activated: true

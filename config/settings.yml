@@ -1,3 +1,5 @@
 front_end:
   text_area:
     rows_num: 5
+comment:
+  limit_show: 3
