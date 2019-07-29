@@ -7,6 +7,9 @@ vi:
     destroy:
       deleted: "Xóa bài viết thành công!"
       detete_error: "Xóa không thành công"
+    update:
+      updated: "Cập nhật thành công!"
+      fail: "Cập nhật thất bại!"
   shared:
     post_element:
       you_sure: "Bạn chắc chắn muốn xóa?"
@@ -17,4 +20,5 @@ vi:
     post:
       submit: "Gửi"
       new_post: "Tạo bài viết mới"
+      update_post: "Cập nhật bài viết"
       compose_new_post: "Nội dung bài viết..."

@@ -16,7 +16,7 @@
 
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
             <% if current_user?(p.user) %>
-              <a class="dropdown-item" href="#"><%= t ".edit" %></a>
+              <button class="dropdown-item edit_post" value="<%= p.id %>"><%= t ".edit" %></button>
               <%= link_to t(".delete"), p, method: :delete, class: "dropdown-item",
                   data: { confirm: t(".you_sure") } %>
             <% else %>

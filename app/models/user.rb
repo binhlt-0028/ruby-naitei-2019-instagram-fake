@@ -17,6 +17,6 @@ class User < ApplicationRecord
               class_name: Notification.name
 
   def feed
-    Post.where user_id: id
+    Post.post_auth id
   end
 end
