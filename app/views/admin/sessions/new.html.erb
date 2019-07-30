@@ -1,0 +1,22 @@
+<div class="h-100 bg-gradient">
+  <div class="container bg-light w-50">
+    <%= form_tag(admin_sessions_path, class:"pb-3 pt-5") do |form| %>
+      <div class="text-center mb-3 text-black display-4"><%= t "Admin_login" %></div>
+      <div class="field input-group mb-3 justify-content-center">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-lock"></i></span>
+        </div>
+        <%= text_field_tag :name, nil, placeholder: t("username"), class:"center" %>
+      </div>  
+      <div class="field input-group mb-3 justify-content-center">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-lock"></i></span>
+        </div>
+        <%= password_field_tag :password, nil, placeholder: t("password")%>
+      </div>  
+      <div class="actions d-flex justify-content-center">
+        <%= submit_tag t("login"), class: "btn btn-secondary rounded-lg" %>
+      </div>
+    <% end %>
+  </div>
+</div>

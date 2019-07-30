@@ -34,10 +34,6 @@ class User < ApplicationRecord
     end
   end
 
-  def feed
-    Post.post_auth id
-  end
-
   def activate
     update_columns activated: true
   end
@@ -48,5 +44,9 @@ class User < ApplicationRecord
 
   def create_activation_token
     self.activation_token = User.new_token
+  end
+
+  def feed
+    Post.post_auth id
   end
 end

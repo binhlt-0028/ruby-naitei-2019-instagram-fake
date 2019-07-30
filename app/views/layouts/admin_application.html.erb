@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "admin_application", media: "all",
+  "data-turbolinks-track": "reload" %>
+  <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" %>
+  <%= stylesheet_link_tag "http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" %>
+  <%= stylesheet_link_tag "https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" %>
+  <%= javascript_include_tag "admin_application",
+  "data-turbolinks-track": "reload" %>
+  <%= javascript_include_tag "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"%>
+</head>
+<body class="skin-blue">
+  <%= render "admin/layouts/header" %>
+  <%= render "admin/layouts/aside" %>
+  <div class="content-wrapper">
+    <article>
+      <header class="content-header container-fluid">
+        <div class="row">
+          <div class="col-lg-8">
+            <h1 class="content-max-width"><%= yield :component_title %></h1>
+          </div>
+        </div>
+      </header>
+      <div class="content container-fluid">
+        <%= yield %>
+      </div>
+    </article>
+  </div>
+</body>
+</html>

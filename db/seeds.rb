@@ -1,10 +1,8 @@
-User.create! name: "thanhbinh",
-             email: "binh97.lt@gmail.com",
-             password_digest: "123456",
-             non_block: true,
-             activated: true
+Admin.create! name: "admin",
+             password: "admin"
+
 User.create! name: "user",
-             email: "user",
-             password_digest: "123456",
+             email: "user@user.com",
+             password: "123456",
              non_block: true,
              activated: true

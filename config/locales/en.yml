@@ -1,8 +1,7 @@
 en:
   user_update_success: "update user success"
   avatar: "Avatar"
-  activate: "Activate"
-  account: "account"
+  activate_account: "Activate account"
   account_activated: "Account activated"
   not_activated: "Account not activated"
   check_email: "Please check mail to active"

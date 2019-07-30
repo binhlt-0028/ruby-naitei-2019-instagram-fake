@@ -10,6 +10,7 @@ $(document).ready(function(){
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
+
   $('#new_post_input').on('focus',function () {
     $('#new_post_modal').modal('show');
   })

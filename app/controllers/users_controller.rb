@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new user_params
+
     if @user.save
       @user.send_activation_email
       flash[:info] = t "user_create_check_mail"
@@ -43,13 +44,13 @@ class UsersController < ApplicationController
 
   def load_user
     @user = User.find_by id: params[:id]
-    return unless @user.nil?
+    return if @user
     flash[:waring] = t "user_not_exist"
     redirect_to root_url
   end
 
   def user_params
-    params.permit(:name, :email, :password,
+    params.require(:user).permit(:name, :email, :password,
       :password_confirmation, :avatar)
   end
 end
