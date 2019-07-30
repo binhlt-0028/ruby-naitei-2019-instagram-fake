@@ -1,0 +1,30 @@
+<%= form_with(model: user, local: true, html: { :multipart => true }) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <label for="name" class="sr-only"><%= t "username" %></label>
+  <%= text_field_tag :name, nil, placeholder: t("name"),
+    class:"form-control mb-2" %>
+  <label for="email" class="sr-only"><%= t "email" %></label>
+  <%= text_field_tag :email, nil, placeholder: t("email"),
+    class:"form-control mb-2" %>
+  <label for="password" class="sr-only"><%= t "password" %></label>
+  <%= password_field_tag :password, nil, placeholder: t("password"),
+    class:"form-control mb-2" %>
+  <label for="confirm_password" class="sr-only">
+    <%= t "confirm_password" %></label>
+  <%= password_field_tag :password_confirmation, nil,
+    placeholder: t("confirm_password"), class:"form-control mb-2" %>
+  <%= submit_tag t("sign_up"), class: "btn btn-primary btn-block" %>
+  <div class="d-flex justify-content-center links">
+    <%= link_to t("login"), sessions_path %>
+  </div>
+  <p class="mb-3 text-center text-muted">Copyright &copy; 2019</p>
+<% end %>

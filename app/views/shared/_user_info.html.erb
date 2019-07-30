@@ -1,38 +1,42 @@
 <div class="left-side col-md-4 d-none d-md-block">
   <div class="card shadow">
-    <img class="card-img-top" src="https://znews-photo.zadn.vn/w660/Uploaded/cqdhmdxwp/2019_05_07/58950005_2293435560976842_1995073838693482496_o.jpg" alt="Card image cap">
+    <%= image_tag user_avatar(@user), class: "card-img-top" %>
     <div class="card-body pb-0">
       <h4 class="card-title text-center font-weight-bold">
-        My girl
+        <%= @user.name %>
       </h4>
       <div class="row py-2 text-center">
         <div class="col-6 border-right">
           <a href="" class="font-weight-bold">
-            <p>Following</p>
+            <p><%= t ".following" %></p>
             <span>50</span>
           </a>
         </div>
         <div class="col-6">
           <a href="" class="font-weight-bold">
-            <p>Followed</p>
+            <p><%= t ".followed" %></p>
             <span>50</span>
           </a>
         </div>
       </div>
       <div class="row">
-        <a href="#" class="btn btn-sm btn-primary w-50">My page</a>
-        <a href="#" class="btn btn-sm btn-danger w-50">Sign out</a>
+        <% if is_current_user?(@user) %>
+          <%= link_to t(".my_page"), @user,
+            class: "btn btn-sm btn-primary w-50" %>
+          <%= link_to t(".sign_out"), logout_path,
+            class: "btn btn-sm btn-danger w-50" %>
+        <% end %>
       </div>
       <div class="sub-menu mt-3">
         <ul class="nav justify-content-between">
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <li><%= link_to t(".about"), "#", class: "nav-link" %></li>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <li><%= link_to t(".contact"), "#", class: "nav-link" %></li>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Help</a>
+            <li><%= link_to t(".help"), "#", class: "nav-link" %></li>
           </li>
         </ul>
         <p class="text-muted text-center small">

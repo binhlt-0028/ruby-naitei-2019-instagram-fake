@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
-  before_action :load_post, only: %i(destroy edit update)
+  before_action :load_post, only: %i(show destroy edit update)
 
   def create
-    @post = load_current_user.posts.build post_params
+    @post = current_user.posts.build post_params
     @post.non_block = true
     if @post.save
       flash[:success] = t ".created"
@@ -22,7 +22,9 @@ class PostsController < ApplicationController
     redirect_to root_url
   end
 
-  def show; end
+  def show
+    @current_user = current_user
+  end
 
   def edit
     respond_to do |format|

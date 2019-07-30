@@ -1,4 +1,23 @@
 en:
+  user_update_success: "update user success"
+  avatar: "Avatar"
+  activate: "Activate"
+  account: "account"
+  account_activated: "Account activated"
+  not_activated: "Account not activated"
+  check_email: "Please check mail to active"
+  logged_out: "Logged out! See you again!"
+  logged_in: "Login success!"
+  user_create_check_mail: "Sign success! Please check mail to active"
+  username: "Username"
+  name: "name"
+  email: "Email"
+  confirm_password: "Confirm password"
+  password: "Password"
+  login: "Login"
+  invalid: "Username / password is invalid"
+  sign_up: "Sign up"
+  dont_have_acc: "Don't have an account? "
   posts:
     create:
       created: "Create post successfully!"
@@ -10,6 +29,12 @@ en:
     update:
       updated: "Update successfully!"
       fail: "Update fail!"
+    show:
+      you_sure: "You sure?"
+      delete: "Delete"
+      edit: "Edit"
+      report: "Report"
+      submit: "Submit"
   shared:
     post_element:
       you_sure: "You sure?"
@@ -17,8 +42,31 @@ en:
       edit: "Edit"
       report: "Report"
       commented: "people commented..."
+      no_post: "No post of this user"
     post:
       submit: "Submit"
       new_post: "Create new post"
       update_post: "Update post"
       compose_new_post: "Compose new post..."
+    user_info:
+      my_page: "My page"
+      sign_out: "Sign out"
+      about: "About"
+      contact: "Contact"
+      help: "Help"
+      following: "Following"
+      followed: "Followed"
+  layouts:
+    header:
+      home: "Home"
+      login: "Login"
+      search: "Search"
+      messages: "Messages"
+      notification: "Notification"
+      view_all: "View all"
+      my_page: "My page"
+      setting: "Setting"
+      sign_out: "Sign out"
+  users:
+    edit:
+      update: "Update"

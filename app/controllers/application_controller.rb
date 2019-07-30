@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_locale
+  helper_method :current_user, :log_in
 
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
@@ -7,5 +8,17 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     {locale: I18n.locale}
+  end
+
+  def current_user
+    if session[:user_id]
+      @current_user ||= User.find_by id: session[:user_id]
+    else
+      @current_user = nil
+    end
+  end
+
+  def log_in user
+    session[:user_id] = user.id
   end
 end

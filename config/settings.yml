@@ -3,3 +3,7 @@ front_end:
     rows_num: 5
 comment:
   limit_show: 3
+name_max: 50
+email_max: 255
+pass_min: 6
+default_avatar: "default_avatar.jpg"

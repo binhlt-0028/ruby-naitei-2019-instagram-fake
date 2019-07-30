@@ -1,4 +1,23 @@
 vi:
+  user_update_success: "Nhập nhật thông tin thành công"
+  avatar: "Ảnh đại diện"
+  activate: "Kích hoạt"
+  account: "tài khoản"
+  account_activated: "Tài khoản đã được kích hoạt"
+  not_activated: "Tài khoản chưa được kích hoạt!"
+  check_email: "Kiểm tra mail để kích hoạt"
+  logged_out: "Đăng xuất thành công"
+  logged_in: "Đăng nhập thành công!"
+  user_create_check_mail: "Đăng kí thành công! Kiểm tra mail để hoàn tất"
+  username: "Tên đăng nhập"
+  name: "Họ tên"
+  email: "Email"
+  confirm_password: "Xác nhận mật khẩu"
+  password: "Mật khẩu"
+  login: "Đăng nhập"
+  invalid: "Thông tin tài khoản mật khẩu không hợp lệ"
+  sign_up: "Đăng ký"
+  dont_have_acc: "Bạn chưa có tài khoản? "
   posts:
     create:
       created: "Tạo bài viết thành công!"
@@ -10,6 +29,12 @@ vi:
     update:
       updated: "Cập nhật thành công!"
       fail: "Cập nhật thất bại!"
+    show:
+      you_sure: "Bạn chắc chắn muốn xóa?"
+      delete: "Xóa"
+      edit: "Chỉnh sửa"
+      report: "Báo cáo"
+      submit: "Gửi"
   shared:
     post_element:
       you_sure: "Bạn chắc chắn muốn xóa?"
@@ -17,8 +42,31 @@ vi:
       edit: "Chỉnh sửa"
       report: "Báo cáo"
       commented: "người đã bình luận..."
+      no_post: "Không có bài viết nào cho người dùng này"
     post:
       submit: "Gửi"
       new_post: "Tạo bài viết mới"
       update_post: "Cập nhật bài viết"
       compose_new_post: "Nội dung bài viết..."
+    user_info:
+      my_page: "Trang của tôi"
+      sign_out: "Đăng xuất"
+      about: "Giới thiệu"
+      contact: "Liên hệ"
+      help: "Trợ giúp"
+      following: "Đang theo dõi"
+      followed: "Được theo dõi"
+  layouts:
+    header:
+      home: "Trang chủ"
+      login: "Đăng nhập"
+      search: "Tìm kiếm"
+      messages: "Tin nhắn"
+      notification: "Thông báo"
+      view_all: "Xem tất cả"
+      my_page: "Trang của tôi"
+      setting: "Cài đặt"
+      sign_out: "Đăng xuất"
+  users:
+    edit:
+      update: "Cập nhật"

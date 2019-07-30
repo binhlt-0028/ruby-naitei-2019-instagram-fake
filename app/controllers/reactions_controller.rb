@@ -43,6 +43,6 @@ class ReactionsController < ApplicationController
   end
 
   def build_reaction
-    @reaction = load_current_user.reactions.build
+    @reaction = current_user.reactions.build
   end
 end

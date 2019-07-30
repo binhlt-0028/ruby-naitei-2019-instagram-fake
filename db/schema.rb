@@ -96,13 +96,14 @@ ActiveRecord::Schema.define(version: 2019_07_19_061403) do
     t.string "email"
     t.string "password_digest"
     t.string "avatar"
-    t.string "activate_digest"
-    t.string "reset_degest"
-    t.string "remeber_digest"
-    t.boolean "activated"
-    t.boolean "non_block"
+    t.string "activation_token"
+    t.string "reset_token"
+    t.boolean "activated", default: false
+    t.boolean "non_block", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["name"], name: "index_users_on_name", unique: true
   end
 
 end
