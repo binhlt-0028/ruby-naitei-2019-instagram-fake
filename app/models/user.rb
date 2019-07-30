@@ -34,10 +34,6 @@ class User < ApplicationRecord
     end
   end
 
-  def feed
-    Post.post_auth id
-  end
-
   def activate
     update_columns activated: true
   end
@@ -48,5 +44,22 @@ class User < ApplicationRecord
 
   def create_activation_token
     self.activation_token = User.new_token
+  end
+
+  def feed
+    following_id = FollowUser.where(follower_id: id).pluck(:followed_id)
+    Post.where(user_id: following_id).or(Post.where(user_id: id))
+  end
+
+  def follow other_user
+    following << other_user
+  end
+
+  def unfollow other_user
+    following.delete(other_user)
+  end
+
+  def following? other_user
+    following.include?(other_user)
   end
 end

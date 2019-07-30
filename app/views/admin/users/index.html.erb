@@ -1,0 +1,34 @@
+<% content_for :component_title, "All user" %>
+<table id="datatable" class="table table-striped table-bordered">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>email</th>
+          <th>Posts</th>
+          <th>Following</th>
+          <th>Followed</th>
+          <th>Reports</th>
+          <th>Action</th>
+      </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr class="admin-user">
+        <td><%= link_to user.name, user %></td>
+        <td><%= user.email %></td>
+        <td><%= user.posts.count %></td>
+        <td><%= user.following.count %></td>
+        <td><%= user.followers.count %></td>
+        <td><%= Post.joins(:reports).where(user: user).count %></td>
+        <td>
+          <button value="<%= user.id %>" class="btn btn-sm btn-warning block-user">
+            <%= user.non_block? ? "Block" : "UnBlock" %>
+          </button>
+          <button value="<%= user.id %>" class="btn btn-sm btn-danger delete-user">
+            Delete
+          </button>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

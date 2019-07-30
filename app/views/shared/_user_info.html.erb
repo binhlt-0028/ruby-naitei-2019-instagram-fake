@@ -3,20 +3,20 @@
     <%= image_tag user_avatar(@user), class: "card-img-top" %>
     <div class="card-body pb-0">
       <h4 class="card-title text-center font-weight-bold">
-        <%= @user.name %>
+        <%= link_to @user.name, @user %>
       </h4>
       <div class="row py-2 text-center">
         <div class="col-6 border-right">
-          <a href="" class="font-weight-bold">
+          <%= link_to following_user_path(@user), class: "font-weight-bold" do%>
             <p><%= t ".following" %></p>
-            <span>50</span>
-          </a>
+            <span id="following_count"><%= @user.following.count %></span>
+          <% end %>
         </div>
         <div class="col-6">
-          <a href="" class="font-weight-bold">
+          <%= link_to followers_user_path(@user), class: "font-weight-bold" do%>
             <p><%= t ".followed" %></p>
-            <span>50</span>
-          </a>
+            <span id="followed_count"><%= @user.followers.count %></span>
+          <% end %>
         </div>
       </div>
       <div class="row">
@@ -25,6 +25,16 @@
             class: "btn btn-sm btn-primary w-50" %>
           <%= link_to t(".sign_out"), logout_path,
             class: "btn btn-sm btn-danger w-50" %>
+        <% elsif  current_user.following?(@user) %>
+          <button id="unfollow_btn" class="btn btn-danger w-75 m-auto"
+            value="<%= @user.id %>">
+            Unfollow
+          </button>
+        <% else %>
+          <button id="follow_btn" class="btn btn-primary w-75 m-auto"
+            value="<%= @user.id %>">
+            Follow
+          </button>
         <% end %>
       </div>
       <div class="sub-menu mt-3">

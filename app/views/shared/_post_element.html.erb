@@ -26,8 +26,15 @@
             <button class="dropdown-item edit_post" value="<%= p.id %>"><%= t ".edit" %></button>
             <%= link_to t(".delete"), p, method: :delete, class: "dropdown-item",
             data: { confirm: t(".you_sure") } %>
+            <% elsif p.reports.where(user_id: current_user.id).nil? %>
+              <button class="dropdown-item report_post"
+                value="<%= p.id %>" disabled>
+                <%= t ".report" %>
+              </button>
             <% else %>
-            <a class="dropdown-item" href="#"><%= t ".report" %></a>
+              <button class="dropdown-item report_post" value="<%= p.id %>">
+                <%= t ".report" %>
+              </button>
             <% end %>
 
           </div>
