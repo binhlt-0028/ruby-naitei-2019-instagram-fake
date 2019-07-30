@@ -1,8 +1,9 @@
 vi:
+  following: "Danh sách đang theo dõi"
+  followers: "Danh sách theo dõi bạn"
   user_update_success: "Nhập nhật thông tin thành công"
   avatar: "Ảnh đại diện"
-  activate: "Kích hoạt"
-  account: "tài khoản"
+  activate_account: "Kích hoạt tài khoản"
   account_activated: "Tài khoản đã được kích hoạt"
   not_activated: "Tài khoản chưa được kích hoạt!"
   check_email: "Kiểm tra mail để kích hoạt"

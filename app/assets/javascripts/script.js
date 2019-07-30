@@ -2,7 +2,7 @@ const json_stt = {
   ERROR: 404,
   SUCCESS: 200
 }
-const REACTION_DEFAULT_CLASS = "far fa-thumbs-up";
+const REACTION_DEFAULT_CLASS = 'far fa-thumbs-up';
 
 $(document).ready(function(){
   $.ajaxSetup({
@@ -10,11 +10,12 @@ $(document).ready(function(){
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-  $('#new_post_input').on('focus',function () {
+
+  $(document).on('focus', '#new_post_input', function () {
     $('#new_post_modal').modal('show');
   })
 
-  $('#new_post_add_image').on('click', function () {
+  $(document).on('click', '#new_post_add_image', function () {
     $('#new_post_image').trigger('click');
   })
 
@@ -63,6 +64,7 @@ $(document).ready(function(){
     else
       update_reaction(type_class, show_element, reac_count_tag);
   })
+
   $(document).on('keypress', '.new_comment', function (e) {
     var input = $(this);
     if(e.which == 13){
@@ -174,6 +176,41 @@ $(document).ready(function(){
       });
     }
   })
+
+  $(document).on('click', '#follow_btn', function () {
+    var button = $(this);
+    var followed_id = $(this).val();
+    $.ajax({
+          url: '/follow_users',
+          type: 'POST',
+          dataType: 'JSON',
+          data: {
+            followed_id: followed_id
+          }
+      }).done(function(result) {
+        if(result.status == json_stt.SUCCESS){
+          $("#followed_count").html(result.data);
+          button.attr('id','unfollow_btn');
+          button.removeClass('btn-primary').addClass('btn-danger');
+        }
+      });
+  })
+
+  $(document).on('click', '#unfollow_btn', function () {
+    var button = $(this);
+    var id = $(this).val();
+    $.ajax({
+          url: '/follow_users/'+ id,
+          type: 'DELETE',
+          dataType: 'JSON'
+      }).done(function(result) {
+        if(result.status == json_stt.SUCCESS){
+          $('#followed_count').html(result.data);
+          button.attr('id','follow_btn');
+          button.removeClass('btn-danger').addClass('btn-primary');
+        }
+      });
+  })
 })
 
 function create_reaction(type_class, show_element, reac_count_tag){
@@ -191,7 +228,7 @@ function create_reaction(type_class, show_element, reac_count_tag){
       if(result.status == json_stt.SUCCESS){
         var show_i_tag = show_element.children('i');
         show_i_tag.removeClass();
-        show_i_tag.addClass("fas");
+        show_i_tag.addClass('fas');
         show_i_tag.addClass(type_class);
         reac_count_tag.find('.reaction_id').val(result.data.id);
         show_element.children('span').html(result.data.count);
@@ -211,7 +248,7 @@ function destroy_reaction(show_element, reac_count_tag){
         var show_i_tag = show_element.children('i');
         show_i_tag.removeClass();
         show_i_tag.addClass(REACTION_DEFAULT_CLASS);
-        reac_count_tag.find('.reaction_id').val("");
+        reac_count_tag.find('.reaction_id').val('');
         show_element.children('span').html(result.data.count);
         reac_count_tag.find('a').removeClass('active');
       }
@@ -232,7 +269,7 @@ function update_reaction(type_class, show_element, reac_count_tag){
       if(result.status == json_stt.SUCCESS){
         var show_i_tag = show_element.children('i');
         show_i_tag.removeClass();
-        show_i_tag.addClass("fas");
+        show_i_tag.addClass('fas');
         show_i_tag.addClass(type_class);
         show_element.children('span').html(result.data.count);
       }

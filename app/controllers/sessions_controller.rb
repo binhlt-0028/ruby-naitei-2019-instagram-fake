@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    if @user&.authenticate(params[:password])
+    if @user && @user.authenticate(params[:password])
       if @user.activated?
         log_in @user
         flash[:success] = t "logged_in"
@@ -23,6 +23,8 @@ class SessionsController < ApplicationController
     flash[:success] = t "logged_out"
     redirect_to root_path
   end
+
+  private
 
   def load_user
     @user = User.find_by_email params[:email]

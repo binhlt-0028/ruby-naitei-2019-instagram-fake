@@ -1,5 +1,7 @@
 {
   "name": "ruby-naitei-2019-instagram-fake",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "admin-lte": "2.3.5"
+  }
 }
