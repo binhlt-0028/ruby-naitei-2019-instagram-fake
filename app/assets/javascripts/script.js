@@ -36,11 +36,11 @@ $(document).ready(function(){
     $('#preview_image').addClass('d-none');
   })
 
-  $('.edit_post').on('click', function (e) {
+  $(document).on('click', '.edit_post', function (e) {
     e.preventDefault();
     var id = $(this).val();
     $.ajax({
-        url: 'posts/'+ id + '/edit',
+        url: '/posts/'+ id + '/edit',
         type: 'GET',
         dataType: 'JSON',
     }).done(function(result) {
@@ -51,7 +51,7 @@ $(document).ready(function(){
     $('#edit_post_modal').modal('show');
   })
 
-  $('.reaction-count .dropdown-menu i.far').on('click', function () {
+  $(document).on('click', '.reaction-count .dropdown-menu i.far', function () {
     var clicked = $(this);
     var reac_count_tag = clicked.parents('.reaction-count');
     var type_class = clicked.attr('class').split(' ')[1];
@@ -63,14 +63,13 @@ $(document).ready(function(){
     else
       update_reaction(type_class, show_element, reac_count_tag);
   })
-
-  $('.new_comment').on('keypress', function (e) {
+  $(document).on('keypress', '.new_comment', function (e) {
     var input = $(this);
     if(e.which == 13){
       var post_id = input.parent().find('.post_id').val();
       var content = input.val();
       $.ajax({
-        url: 'comments',
+        url: '/comments',
         type: 'POST',
         dataType: 'JSON',
         data:{
@@ -107,11 +106,11 @@ $(document).ready(function(){
     }
   })
 
-  $('.del_cmt').on('click', function () {
+  $(document).on('click', '.del_cmt', function () {
     var del_btn = $(this);
     var id = $(this).val();
     $.ajax({
-        url: 'comments/'+ id,
+        url: '/comments/'+ id,
         type: 'DELETE',
         dataType: 'JSON',
     }).done(function(result) {
@@ -122,11 +121,11 @@ $(document).ready(function(){
     });
   })
 
-  $('.edit_cmt').on('click', function () {
+  $(document).on('click', '.edit_cmt', function () {
     var edit_btn = $(this);
     var id = $(this).val();
     $.ajax({
-        url: 'comments/'+ id+'/edit',
+        url: '/comments/'+ id+'/edit',
         type: 'GET',
         dataType: 'JSON',
     }).done(function(result) {
@@ -144,7 +143,7 @@ $(document).ready(function(){
       var content = $(this).val();
       var id = $(this).parent().find('.edit_id').val();
       $.ajax({
-          url: 'comments/'+ id,
+          url: '/comments/'+ id,
           type: 'PATCH',
           dataType: 'JSON',
           data: {
@@ -181,7 +180,7 @@ function create_reaction(type_class, show_element, reac_count_tag){
     var type_id = type_class.replace(/\-/g,'_');
     var post_id = reac_count_tag.find('.post_id').val();
     $.ajax({
-        url: 'reactions',
+        url: '/reactions',
         type: 'POST',
         dataType: 'JSON',
         data:{
@@ -204,7 +203,7 @@ function create_reaction(type_class, show_element, reac_count_tag){
 function destroy_reaction(show_element, reac_count_tag){
   var id = reac_count_tag.find('.reaction_id').val();
   $.ajax({
-        url: 'reactions/'+id,
+        url: '/reactions/'+id,
         type: 'DELETE',
         dataType: 'JSON',
     }).done(function(result) {
@@ -223,7 +222,7 @@ function update_reaction(type_class, show_element, reac_count_tag){
   var id = reac_count_tag.find('.reaction_id').val();
   var type_id = type_class.replace(/\-/g,'_');
   $.ajax({
-        url: 'reactions/'+id,
+        url: '/reactions/'+id,
         type: 'PATCH',
         dataType: 'JSON',
         data:{

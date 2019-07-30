@@ -1,0 +1,17 @@
+<div class="bg-light w-50 m-auto p-5">
+  <%= form_tag sessions_path do |form| %>
+    <%= image_tag("logo.png", size: "80x80", class: "mb-2 mx-auto d-block") %>
+    <h1 class="h3 mb-3 text-center font-weight-normal"><%= t "login" %></h1>
+    <label for="inputEmail" class="sr-only"><%= t "username" %></label>
+    <%= text_field_tag :email, nil, placeholder: t("username"),
+      class:"form-control mb-2" %>
+    <label for="inputPassword" class="sr-only"><%= t "password" %></label>
+    <%= password_field_tag :password, nil, placeholder: t("password"),
+      class:"form-control mb-2" %>
+    <%= submit_tag t("login"), class: "btn btn-primary btn-block" %>
+    <div class="d-flex justify-content-center links">
+      <%= t "dont_have_acc" %><%= link_to t("sign_up"), signup_path %>
+    </div>
+    <p class="mb-3 text-center text-muted">Copyright &copy; 2019</p>
+  <% end %>
+</div>

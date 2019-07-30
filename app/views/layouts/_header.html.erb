@@ -1,54 +1,65 @@
-<nav class="header navbar fixed-top navbar-expand-md navbar-light bg-light py-0">
-  <a class="navbar-brand" href="#">
-    <img src="/assets/logo.png" class="d-inline-block align-top logo" alt="">
-  </a>
+  <nav class="header navbar fixed-top navbar-expand-md navbar-light bg-light py-0">
+  <%= link_to root_path, class: "mr-2" do %>
+    <%= image_tag("logo.png", class: "d-inline-block align-top logo") %>
+  <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+      <input class="form-control mr-sm-2" type="search" placeholder="<%= t ".search" %>">
+      <button class="btn btn-success my-2 my-sm-0" type="submit">
+        <%= t ".search" %>
+      </button>
     </form>
     <ul class="navbar-nav ml-auto d-flex align-items-center">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
+        <li><%= link_to t(".home"), root_path, class: "nav-link" %></li>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Message</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Notification
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown d-none d-md-block">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img src="https://znews-photo.zadn.vn/w660/Uploaded/cqdhmdxwp/2019_05_07/58950005_2293435560976842_1995073838693482496_o.jpg" class="avatar rounded-circle">
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">My page</a>
-          <a class="dropdown-item" href="#">Settings</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Sign out</a>
-        </div>
-      </li>
-      <li class="nav-item d-md-none">
-        <a class="nav-link" href="#">My page</a>
-      </li>
-      <li class="nav-item d-md-none">
-        <a class="nav-link" href="#">Setting</a>
-      </li>
-      <li class="nav-item d-md-none">
-        <a class="nav-link" href="#">Sign out</a>
-      </li>
+      <% if current_user.nil? %>
+        <li class="nav-item">
+          <li><%= link_to t(".login"), sessions_path, class: "nav-link" %></li>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <li><%= link_to t(".messages"), "#", class: "nav-link" %></li>
+        </li>
+        <li class="nav-item dropdown">
+          <%= link_to t(".notification"), "#", class: "nav-link dropdown-toggle",
+            data: {toggle: "dropdown"} %>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "123", "#", class: "dropdown-item" %>
+            <%= link_to "123", "#", class: "dropdown-item" %>
+            <%= link_to "123", "#", class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to t(".view_all"), "#", class: "dropdown-item" %>
+          </div>
+        </li>
+        <li class="nav-item dropdown d-none d-md-block">
+          <%= link_to "#", class: "nav-link dropdown-toggle",
+            data: {toggle: "dropdown"} do %>
+            <%= image_tag user_avatar(current_user),
+              class: "avatar rounded-circle" %>
+          <% end %>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%= link_to t(".my_page"), current_user, class: "dropdown-item" %>
+            <%= link_to t(".setting"), edit_user_path(current_user),
+              class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to t(".sign_out"), logout_path, class: "dropdown-item" %>
+          </div>
+        </li>
+        <li class="nav-item d-md-none">
+          <%= link_to t(".my_page"), current_user, class: "dropdown-item" %>
+        </li>
+        <li class="nav-item d-md-none">
+          <%= link_to t(".setting"), "#", class: "dropdown-item" %>
+        </li>
+        <li class="nav-item d-md-none">
+          <%= link_to t(".sign_out"), logout_path, class: "dropdown-item" %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>

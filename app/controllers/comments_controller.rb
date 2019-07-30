@@ -60,6 +60,6 @@ class CommentsController < ApplicationController
   end
 
   def build_comment
-    @comment = load_current_user.comments.build
+    @comment = current_user.comments.build
   end
 end
